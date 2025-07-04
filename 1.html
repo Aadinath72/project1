@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Animation</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #87CEEB 50%, #228B22 50%);
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        .scene {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .road {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 150px;
+            background: #333;
+        }
+
+        .lane-marker {
+            position: absolute;
+            height: 10px;
+            width: 80px;
+            background: yellow;
+            bottom: 70px;
+        }
+
+        .car {
+            position: absolute;
+            width: 200px;
+            height: 100px;
+            bottom: 50px;
+            left: 50px;
+            animation: moveCar 10s linear infinite;
+        }
+
+        .car-body {
+            position: relative;
+            width: 180px;
+            height: 60px;
+            background: red;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .car-top {
+            position: absolute;
+            width: 100px;
+            height: 40px;
+            background: red;
+            top: -40px;
+            left: 40px;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .wheel {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: #333;
+            border-radius: 50%;
+            bottom: -10px;
+            animation: spinWheel 0.5s linear infinite;
+        }
+
+        .wheel-1 {
+            left: 10px;
+        }
+
+        .wheel-2 {
+            right: 10px;
+        }
+
+        .sun {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: #FDB813;
+            border-radius: 50%;
+            top: 50px;
+            right: 100px;
+        }
+
+        .tree {
+            position: absolute;
+            width: 60px;
+            height: 150px;
+            bottom: 150px;
+            right: 200px;
+        }
+
+        .tree-trunk {
+            position: absolute;
+            width: 20px;
+            height: 80px;
+            background: #8B4513;
+            bottom: 0;
+            left: 20px;
+        }
+
+        .tree-leaves {
+            position: absolute;
+            width: 60px;
+            height: 80px;
+            background: #228B22;
+            border-radius: 50%;
+            bottom: 70px;
+        }
+
+        @keyframes moveCar {
+            from {
+                left: -200px;
+            }
+            to {
+                left: 100%;
+            }
+        }
+
+        @keyframes spinWheel {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .controls {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 5px 10px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="scene">
+        <div class="sun"></div>
+        <div class="road">
+            <div class="lane-marker" style="left: 100px;"></div>
+            <div class="lane-marker" style="left: 400px;"></div>
+            <div class="lane-marker" style="left: 700px;"></div>
+            <div class="lane-marker" style="left: 1000px;"></div>
+        </div>
+        <div class="tree">
+            <div class="tree-leaves"></div>
+            <div class="tree-trunk"></div>
+        </div>
+        
+        <div class="car">
+            <div class="car-body">
+                <div class="wheel wheel-1"></div>
+                <div class="wheel wheel-2"></div>
+            </div>
+            <div class="car-top"></div>
+        </div>
+
+        <div class="controls">
+            <button id="speedUp">Speed Up</button>
+            <button id="slowDown">Slow Down</button>
+            <button id="stop">Stop</button>
+            <button id="start">Start</button>
+        </div>
+    </div>
+
+    <script>
+        const car = document.querySelector('.car');
+        const speedUpBtn = document.getElementById('speedUp');
+        const slowDownBtn = document.getElementById('slowDown');
+        const stopBtn = document.getElementById('stop');
+        const startBtn = document.getElementById('start');
+
+        let animationDuration = 10;
+        
+        speedUpBtn.addEventListener('click', () => {
+            animationDuration *= 0.8;
+            car.style.animationDuration = `${animationDuration}s`;
+        });
+
+        slowDownBtn.addEventListener('click', () => {
+            animationDuration *= 1.2;
+            car.style.animationDuration = `${animationDuration}s`;
+        });
+
+        stopBtn.addEventListener('click', () => {
+            car.style.animationPlayState = 'paused';
+        });
+
+        startBtn.addEventListener('click', () => {
+            car.style.animationPlayState = 'running';
+        });
+    </script>
+</body>
+</html>
+
